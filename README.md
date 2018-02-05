@@ -1,4 +1,4 @@
-# test-log
+# java-log-testapp
 Project which contains multiple simple applications, these applications are runnable and can be deployed.
 
 ## How to run

@@ -1,6 +1,5 @@
 # Compiled class file
 *.class
-.classpath
 
 # Log file
 *.log
@@ -39,11 +38,3 @@ hs_err_pid*
 
 # Maven
 target
-/bin/
-!.mvn/wrapper/maven-wrapper.jar
-
-# Release automation
-__pycache__
-
-# dll files
-*.dll
