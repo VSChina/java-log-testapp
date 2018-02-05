@@ -11,5 +11,6 @@
     <module>spring-webapp-embedded-tomcat</module>
     <module>log-generator</module>
     <module>spring-webapp-bare</module>
+    <module>spring-batch-simple</module>
   </modules>
 </project>
