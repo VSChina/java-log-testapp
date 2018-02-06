@@ -3,16 +3,16 @@ Project which contains multiple simple applications, these applications are runn
 
 ## How to run
 
-#### spring-webapp-embedded-tomcat
+#### spring-webapp-embedded-tomcat, spring-webapp-embedded-jetty, spring-batch-simple
 ```
 mvn clean install & mvn spring-boot:run
 
 OR
 
-mvn clean install & java -jar target/spring-mvc-app-{version}.jar
+mvn clean install & java -jar target/spring-{name}-{version}.jar
 ```
 
-#### spring-webapp-bare
+#### spring-webapp-traditional
 ```
 mvn clean install
 ```
