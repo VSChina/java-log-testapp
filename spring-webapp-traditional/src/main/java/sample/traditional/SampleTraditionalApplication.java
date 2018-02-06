@@ -16,6 +16,8 @@
 
 package sample.traditional;
 
+import com.microsoft.azure.JULLogWriter;
+import com.microsoft.azure.Log4JLogWriter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -23,6 +25,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SampleTraditionalApplication {
 
 	public static void main(String[] args) throws Exception {
+		JULLogWriter.writeLogs();
+		Log4JLogWriter.writeLogs();
+
 		SpringApplication.run(SampleTraditionalApplication.class, args);
 	}
 
