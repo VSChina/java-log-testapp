@@ -9,8 +9,8 @@
 
   <modules>
     <module>spring-webapp-embedded-tomcat</module>
-    <module>log-generator</module>
-    <module>spring-webapp-bare</module>
+    <module>spring-webapp-tranditional</module>
     <module>spring-batch-simple</module>
+    <module>log-generator</module>
   </modules>
 </project>
