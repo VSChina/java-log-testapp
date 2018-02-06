@@ -13,7 +13,19 @@ mvn clean install & java -jar target/spring-{name}-{version}.jar
 ```
 
 #### spring-webapp-traditional
+
+- build 
 ```
 mvn clean install
 ```
-Place the generated war file under target to tomcat service.
+   Place the generated war file under target to tomcat service.
+
+- build docker image and push to registry
+```properties
+mvn docker:build <-Pwindowswebapp> -DpushImage
+```
+
+### deploy
+```properties
+mvn azure-webapp:deploy
+```
