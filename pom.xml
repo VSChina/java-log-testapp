@@ -5,9 +5,10 @@
   <artifactId>test-log</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>test-log</name>
+  <name>java-log-testapp</name>
 
   <modules>
+    <module>spring-webapp-embedded-jetty</module>
     <module>spring-webapp-embedded-tomcat</module>
     <module>spring-webapp-traditional</module>
     <module>spring-batch-simple</module>
