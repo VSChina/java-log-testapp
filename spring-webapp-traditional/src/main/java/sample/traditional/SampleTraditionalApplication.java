@@ -16,13 +16,14 @@
 
 package sample.traditional;
 
+import com.microsoft.azure.LogWriter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SampleTraditionalApplication {
-
 	public static void main(String[] args) throws Exception {
+		LogWriter.writeLogs();
 		SpringApplication.run(SampleTraditionalApplication.class, args);
 	}
 
