@@ -16,8 +16,10 @@
 
 package sample.traditional;
 
+
 import com.microsoft.azure.serverless.functions.*;
 import com.microsoft.azure.serverless.functions.annotation.*;
+import com.microsoft.azure.LogWriter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -27,6 +29,7 @@ import java.util.*;
 public class SampleTraditionalApplication {
 
     public static void main(String[] args) throws Exception {
+        LogWriter.writeLogs();
         SpringApplication.run(SampleTraditionalApplication.class, args);
     }
 
@@ -38,5 +41,4 @@ public class SampleTraditionalApplication {
 
         return request.createResponse(200, "Hello World from Azure Function!");
     }
-
 }
