@@ -12,7 +12,7 @@
     <groupId>com.microsoft.azure</groupId>
     <artifactId>spring-webapp-traditional</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>Spring Boot Traditional Sample</name>
     <description>Spring Boot Traditional Sample</description>
     <properties>
@@ -20,8 +20,9 @@
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
         <docker.image.prefix>yungez</docker.image.prefix>
         <linux>true</linux>
-        <functionAppName>${project.artifactId}app1</functionAppName>
+        <functionAppName>${project.artifactId}func1</functionAppName>
         <functionRegion>westus</functionRegion>
+        <resourceGroup>yungez-demo</resourceGroup>
     </properties>
 
 
@@ -94,7 +95,7 @@
                         <artifactId>azure-webapp-maven-plugin</artifactId>
                         <version>0.1.6</version>
                         <configuration>
-                            <resourceGroup>yungez-demo</resourceGroup>
+                            <resourceGroup>${resourceGroup}</resourceGroup>
                             <appName>linuxbaretomcat2</appName>
                             <region>eastus</region>
                             <pricingTier>B1</pricingTier>
@@ -118,7 +119,7 @@
                                 <resource>
                                     <targetPath>/</targetPath>
                                     <directory>${project.build.directory}</directory>
-                                    <include>${project.build.finalName}.war</include>
+                                    <include>${project.build.finalName}.jar</include>
                                 </resource>
                             </resources>
                         </configuration>
@@ -129,7 +130,7 @@
                         <groupId>com.microsoft.azure</groupId>
                         <artifactId>azure-functions-maven-plugin</artifactId>
                         <configuration>
-                            <resourceGroup>java-functions-group</resourceGroup>
+                            <resourceGroup>${resourceGroup}</resourceGroup>
                             <appName>${functionAppName}</appName>
                             <region>${functionAppRegion}</region>
                             <appSettings>
@@ -169,6 +170,12 @@
                                                 <include>local.settings.json</include>
                                             </includes>
                                         </resource>
+                                        <resource>
+                                            <directory>${project.build.directory}</directory>
+                                            <includes>
+                                                <include>${project.build.finalName}.jar</include>
+                                            </includes>
+                                        </resource>
                                     </resources>
                                 </configuration>
                             </execution>
@@ -190,7 +197,7 @@
                         <version>0.1.6</version>
                         <configuration>
                             <skip>${linux}</skip>
-                            <resourceGroup>yungez-demo</resourceGroup>
+                            <resourceGroup>${resourceGroup}</resourceGroup>
                             <appName>windowsbaretomcat1</appName>
                             <region>westus</region>
                             <pricingTier>B1</pricingTier>
@@ -203,7 +210,7 @@
                                     <directory>${project.basedir}/target</directory>
                                     <targetPath>webapps</targetPath>
                                     <includes>
-                                        <include>*.war</include>
+                                        <include>*.jar</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -224,30 +231,9 @@
                                 <resource>
                                     <targetPath>/</targetPath>
                                     <directory>${project.build.directory}</directory>
-                                    <include>${project.build.finalName}.war</include>
+                                    <include>${project.build.finalName}.jar</include>
                                 </resource>
                             </resources>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>function</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.microsoft.azure</groupId>
-                        <artifactId>azure-functions-maven-plugin</artifactId>
-                        <version>0.1.10</version>
-                        <configuration>
-                            <resourceGroup>yungez-demo</resourceGroup>
-                            <appName>barefunc1</appName>
-                            <region>westus</region>
-                            <pricingTier>B1</pricingTier>
                         </configuration>
                     </plugin>
                 </plugins>

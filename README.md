@@ -74,3 +74,6 @@ mvn clean install
     mvn azure-functions:package   # package azure function
     mvn azure-functions:run       # run azure function local
     mvn azure-functions:deploy    # deploy to azure
+    ```
+    
+    After deployment, you could access the function by nagivation to `https: <function-name>.azurewebsites.net/api/hello`
