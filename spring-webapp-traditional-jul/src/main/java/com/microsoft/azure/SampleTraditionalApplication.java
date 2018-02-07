@@ -24,6 +24,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
+// If the SpringBootServletInitializer class is not extended,
+// some logs related with Spring Boot starting will not be written to the console
 public class SampleTraditionalApplication extends SpringBootServletInitializer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SampleTraditionalApplication.class);
 
