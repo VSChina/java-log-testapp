@@ -16,14 +16,27 @@
 
 package sample.traditional;
 
+import com.microsoft.azure.serverless.functions.*;
+import com.microsoft.azure.serverless.functions.annotation.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.*;
 
 @SpringBootApplication
 public class SampleTraditionalApplication {
 
-	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleTraditionalApplication.class, args);
-	}
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(SampleTraditionalApplication.class, args);
+    }
+
+    @FunctionName("hello")
+    public HttpResponseMessage<String> hello(
+            @HttpTrigger(name = "req", methods = {"get", "post"}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
+            final ExecutionContext context) {
+        context.getLogger().info("java http trigger processed a request");
+
+        return request.createResponse(200, "Hello World from Azure Function!");
+    }
 
 }
