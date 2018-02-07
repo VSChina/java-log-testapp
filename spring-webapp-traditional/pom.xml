@@ -19,7 +19,7 @@
         <main.basedir>${basedir}/../..</main.basedir>
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
         <docker.image.prefix>yungez</docker.image.prefix>
-        <linux>true</linux>
+        <resourcegroup>yungez-demo</resourcegroup>
     </properties>
     <dependencies>
         <!-- Compile -->
@@ -66,7 +66,7 @@
                         <artifactId>azure-webapp-maven-plugin</artifactId>
                         <version>0.1.6</version>
                         <configuration>
-                            <resourceGroup>yungez-demo</resourceGroup>
+                            <resourceGroup>${resourcegroup}</resourceGroup>
                             <appName>linuxbaretomcat2</appName>
                             <region>eastus</region>
                             <pricingTier>B1</pricingTier>
@@ -111,7 +111,7 @@
                         <version>0.1.6</version>
                         <configuration>
                             <skip>${linux}</skip>
-                            <resourceGroup>yungez-demo</resourceGroup>
+                            <resourceGroup>${resourcegroup}</resourceGroup>
                             <appName>windowsbaretomcat1</appName>
                             <region>westus</region>
                             <pricingTier>B1</pricingTier>
