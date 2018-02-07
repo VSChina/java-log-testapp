@@ -10,23 +10,29 @@
     </parent>
 
     <groupId>com.microsoft.azure</groupId>
-    <artifactId>spring-webapp-traditional</artifactId>
+    <artifactId>spring-webapp-traditional-jul</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>Spring Boot Traditional Sample</name>
+    <name>Spring Boot Traditional Sample - JUL Logging</name>
     <description>Spring Boot Traditional Sample</description>
     <properties>
         <java.version>1.8</java.version>
         <main.basedir>${basedir}/../..</main.basedir>
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
         <docker.image.prefix>yungez</docker.image.prefix>
-        <resourcegroup>yungez-demo</resourcegroup>
+        <linux>true</linux>
     </properties>
     <dependencies>
         <!-- Compile -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -53,6 +59,16 @@
             <artifactId>log-generator</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.25</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
@@ -67,7 +83,7 @@
                         <artifactId>azure-webapp-maven-plugin</artifactId>
                         <version>0.1.6</version>
                         <configuration>
-                            <resourceGroup>${resourcegroup}</resourceGroup>
+                            <resourceGroup>yungez-demo</resourceGroup>
                             <appName>linuxbaretomcat2</appName>
                             <region>eastus</region>
                             <pricingTier>B1</pricingTier>
@@ -112,7 +128,7 @@
                         <version>0.1.6</version>
                         <configuration>
                             <skip>${linux}</skip>
-                            <resourceGroup>${resourcegroup}</resourceGroup>
+                            <resourceGroup>yungez-demo</resourceGroup>
                             <appName>windowsbaretomcat1</appName>
                             <region>westus</region>
                             <pricingTier>B1</pricingTier>
