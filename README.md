@@ -34,6 +34,7 @@ mvn clean install
 
 ## deploy
 
+- [**Deploy to Azure Function**](https://github.com/VSChina/java-log-testapp/blob/function1/README.md)
 - **Deploy to web app**  
   
   Please make docker is installed and running on your dev machine.
@@ -51,5 +52,3 @@ mvn clean install
     
     After deployment, you could navigate to test app `https://<app-name>.azurewebsites.net/app`.
     
-- **Deploy to Azure Function** 
-  please refer to [readme.md](https://github.com/VSChina/java-log-testapp/blob/function1/README.md) in branch `function1`.
