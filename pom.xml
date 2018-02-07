@@ -10,6 +10,7 @@
   <modules>
     <module>spring-webapp-embedded-jetty</module>
     <module>spring-webapp-embedded-tomcat</module>
+    <module>spring-webapp-embedded-tomcat-jul</module>
     <module>spring-webapp-traditional</module>
     <module>spring-batch-simple</module>
     <module>log-generator</module>
