@@ -16,21 +16,22 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.azure.LogWriter;
 import com.microsoft.azure.serverless.functions.*;
 import com.microsoft.azure.serverless.functions.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.microsoft.azure.LogWriter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 import java.util.*;
 
+
 @SpringBootApplication
 public class SampleTraditionalApplication {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SampleTraditionalApplication.class);
+
+    public static void main(String[] args) throws Exception {
+        LogWriter.writeLogs();
+        SpringApplication.run(SampleTraditionalApplication.class, args);
+    }
 
     @FunctionName("hello")
     public HttpResponseMessage<String> hello(
@@ -40,15 +41,4 @@ public class SampleTraditionalApplication {
 
         return request.createResponse(200, "Hello World from Azure Function!");
     }
-
-    public static void main(String[] args) throws Exception {
-        LogWriter.writeLogs();
-        LogWriter.writeLogs();
-
-        LOGGER.info("Starting traditional application..");
-        LOGGER.trace("Trace log: Starting traditional application..");
-
-        SpringApplication.run(SampleTraditionalApplication.class, args);
-    }
-
 }
