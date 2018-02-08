@@ -17,8 +17,10 @@
     <properties>
         <java.version>1.8</java.version>
         <docker.image.prefix>acregister1.azurecr.io</docker.image.prefix>
-        <resourcegroup>wepa-demo</resourcegroup>
+        <resourceGroup>wepa-demo</resourceGroup>
         <plugin.fmp.version>3.5.30</plugin.fmp.version>
+        <functionAppName>${project.artifactId}app1</functionAppName>
+        <functionAppRegion>westus</functionAppRegion>
     </properties>
 
     <dependencies>
@@ -43,6 +45,13 @@
             <artifactId>log-generator</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!--azure function-->
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-functions-java-core</artifactId>
+            <version>[1.0.0-beta-1,1.0.0)</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -61,6 +70,20 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <artifactId>maven-resources-plugin</artifactId>
+                            <version>3.0.2</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>com.microsoft.azure</groupId>
+                            <artifactId>azure-functions-maven-plugin</artifactId>
+                            <version>0.1.10</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+
                 <plugins>
                     <!--*************************************************-->
                     <!-- Deploy to Azure Web App -->
@@ -70,7 +93,7 @@
                         <artifactId>azure-webapp-maven-plugin</artifactId>
                         <version>0.1.6</version>
                         <configuration>
-                            <resourceGroup>${resourcegroup}</resourceGroup>
+                            <resourceGroup>${resourceGroup}</resourceGroup>
                             <appName>linux-tomcat-embedded-app</appName>
                             <region>eastus</region>
                             <pricingTier>B1</pricingTier>
@@ -113,6 +136,63 @@
                             <ignoreServices>false</ignoreServices>
                             <registry>${docker.image.prefix}</registry>
                         </configuration>
+                    </plugin>
+
+                    <!-- deploy to azure function -->
+                    <plugin>
+                        <groupId>com.microsoft.azure</groupId>
+                        <artifactId>azure-functions-maven-plugin</artifactId>
+                        <configuration>
+                            <resourceGroup>${resourceGroup}</resourceGroup>
+                            <appName>${functionAppName}</appName>
+                            <region>${functionAppRegion}</region>
+                            <appSettings>
+                                <property>
+                                    <name>FUNCTIONS_EXTENSION_VERSION</name>
+                                    <value>beta</value>
+                                </property>
+                            </appSettings>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>package-functions</id>
+                                <goals>
+                                    <goal>package</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <overwrite>true</overwrite>
+                                    <outputDirectory>${project.build.directory}/azure-functions/${functionAppName}
+                                    </outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${project.basedir}</directory>
+                                            <includes>
+                                                <include>host.json</include>
+                                                <include>local.settings.json</include>
+                                            </includes>
+                                        </resource>
+                                        <resource>
+                                            <directory>${project.build.directory}</directory>
+                                            <includes>
+                                                <include>${project.build.finalName}.jar</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>
