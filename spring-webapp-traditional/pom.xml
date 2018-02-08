@@ -16,13 +16,14 @@
     <name>Spring Boot Traditional Sample</name>
     <description>Spring Boot Traditional Sample</description>
     <properties>
+        <java.version>1.8</java.version>
         <main.basedir>${basedir}/../..</main.basedir>
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
         <docker.image.prefix>yungez</docker.image.prefix>
         <linux>true</linux>
         <functionAppName>${project.artifactId}func1</functionAppName>
         <functionRegion>westus</functionRegion>
-        <resourceGroup>yungez-demo</resourceGroup>
+        <resourcegroup>yungez-demo</resourcegroup>
     </properties>
 
 
@@ -90,12 +91,15 @@
 
 
                 <plugins>
+                    <!--*************************************************-->
+                    <!-- Deploy to Azure Web App -->
+                    <!--*************************************************-->
                     <plugin>
                         <groupId>com.microsoft.azure</groupId>
                         <artifactId>azure-webapp-maven-plugin</artifactId>
                         <version>0.1.6</version>
                         <configuration>
-                            <resourceGroup>${resourceGroup}</resourceGroup>
+                            <resourceGroup>${resourcegroup}</resourceGroup>
                             <appName>linuxbaretomcat2</appName>
                             <region>eastus</region>
                             <pricingTier>B1</pricingTier>
@@ -122,6 +126,21 @@
                                     <include>${project.build.finalName}.jar</include>
                                 </resource>
                             </resources>
+                            <registryUrl>https://${docker.image.prefix}</registryUrl>
+                            <serverId>${docker.image.prefix}</serverId>
+                        </configuration>
+                    </plugin>
+
+                    <!--*************************************************-->
+                    <!-- Deploy to Kubernetes on Azure Container Service -->
+                    <!--*************************************************-->
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>fabric8-maven-plugin</artifactId>
+                        <version>${plugin.fmp.version}</version>
+                        <configuration>
+                            <ignoreServices>false</ignoreServices>
+                            <registry>${docker.image.prefix}</registry>
                         </configuration>
                     </plugin>
 
@@ -197,7 +216,7 @@
                         <version>0.1.6</version>
                         <configuration>
                             <skip>${linux}</skip>
-                            <resourceGroup>${resourceGroup}</resourceGroup>
+                            <resourceGroup>${resourcegroup}</resourceGroup>
                             <appName>windowsbaretomcat1</appName>
                             <region>westus</region>
                             <pricingTier>B1</pricingTier>
