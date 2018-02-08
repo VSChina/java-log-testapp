@@ -41,13 +41,13 @@ mvn clean install
   - Windows web app
     ```properties
     mvn docker:build <-Pwindowswebapp> -DpushImage # build docker image and push to registry
-    mvn azure-webapp:deply                         # deploy to azure web app
+    mvn azure-webapp:deploy                         # deploy to azure web app
     ```
     **Note** If image push failed, you could try use `docker push <image_name>` to push it to docker hub.
   - Linux web app
     ```properties
     mvn docker:build -DpushImage  # build docker image and push to registry
-    mvn azure-webapp:deply        # deploy to azure web app
+    mvn azure-webapp:deploy        # deploy to azure web app
     ```
     
     After deployment, you could navigate to test app `https://<app-name>.azurewebsites.net/app`.
