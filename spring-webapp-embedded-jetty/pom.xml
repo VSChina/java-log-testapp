@@ -20,7 +20,7 @@
         <java.version>1.8</java.version>
 
 		<docker.image.prefix>acregister1.azurecr.io</docker.image.prefix>
-		<resourcegroup>yungez-demo</resourcegroup>
+		<resourcegroup>wepa-demo</resourcegroup>
 		<plugin.fmp.version>3.5.30</plugin.fmp.version>
 	</properties>
 	<dependencies>
