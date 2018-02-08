@@ -16,6 +16,9 @@
 
 package com.microsoft.azure;
 
+import com.microsoft.azure.LogWriter;
+import com.microsoft.azure.serverless.functions.*;
+import com.microsoft.azure.serverless.functions.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -23,24 +26,29 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
+import java.util.*;
+
 @SpringBootApplication
-// If the SpringBootServletInitializer class is not extended,
-// some logs related with Spring Boot starting will not be written to the console
-public class SampleTraditionalApplication extends SpringBootServletInitializer {
-	private static final Logger LOGGER = LoggerFactory.getLogger(SampleTraditionalApplication.class);
+public class SampleTraditionalApplication {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SampleTraditionalApplication.class);
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(SampleTraditionalApplication.class);
-	}
-	public static void main(String[] args) throws Exception {
-		LogWriter.writeLogs();
-		LogWriter.writeLogs();
+    @FunctionName("hello")
+    public HttpResponseMessage<String> hello(
+            @HttpTrigger(name = "req", methods = {"get", "post"}, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<String>> request,
+            final ExecutionContext context) {
+        context.getLogger().info("java http trigger processed a request");
 
-		LOGGER.info("Starting traditional application..");
-		LOGGER.trace("Trace log: Starting traditional application..");
+        return request.createResponse(200, "Hello World from Azure Function!");
+    }
 
-		SpringApplication.run(SampleTraditionalApplication.class, args);
-	}
+    public static void main(String[] args) throws Exception {
+        LogWriter.writeLogs();
+        LogWriter.writeLogs();
+
+        LOGGER.info("Starting traditional application..");
+        LOGGER.trace("Trace log: Starting traditional application..");
+
+        SpringApplication.run(SampleTraditionalApplication.class, args);
+    }
 
 }
