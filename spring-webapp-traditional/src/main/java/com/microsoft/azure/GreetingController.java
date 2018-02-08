@@ -13,6 +13,8 @@ public class GreetingController {
 
     @RequestMapping("/greeting")
     public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+        LogWriter.writeLogs();
+        
         LOGGER.info("Request received");
         LOGGER.trace("trace log");
 
