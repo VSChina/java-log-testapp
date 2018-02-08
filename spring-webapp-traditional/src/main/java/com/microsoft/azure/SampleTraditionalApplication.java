@@ -35,6 +35,7 @@ public class SampleTraditionalApplication extends SpringBootServletInitializer {
 	}
 	public static void main(String[] args) throws Exception {
 		LogWriter.writeLogs();
+		LogWriter.writeLogs();
 
 		LOGGER.info("Starting traditional application..");
 		LOGGER.trace("Trace log: Starting traditional application..");
