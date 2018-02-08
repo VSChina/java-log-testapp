@@ -135,7 +135,8 @@
                             <pricingTier>B1</pricingTier>
                             <!--windows only-->
                             <javaVersion>1.8</javaVersion>
-                            <javaWebContainer>tomcat 8.5</javaWebContainer>
+                            <!-- Exclude tomcat for embedded Spring Boot webapp -->
+                            <!-- <javaWebContainer>tomcat 8.5</javaWebContainer> -->
                             <deploymentType>ftp</deploymentType>
                             <resources>
                                 <resource>
