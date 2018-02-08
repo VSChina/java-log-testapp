@@ -30,6 +30,7 @@ public class HelloWorldService {
 
 	public String getHelloMessage() {
 		LOGGER.info("getHelloMessage called.");
+		LOGGER.trace("[Trace log] getHelloMessage called.");
 		return "Hello " + this.name;
 	}
 
