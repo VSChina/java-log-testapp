@@ -209,13 +209,14 @@
                         <artifactId>azure-webapp-maven-plugin</artifactId>
                         <version>0.1.6</version>
                         <configuration>
-                            <resourceGroup>${resourcegroup}</resourceGroup>
+                            <resourceGroup>${resourceGroup}</resourceGroup>
                             <appName>windows-tomcat-embedded-app</appName>
                             <region>westus</region>
                             <pricingTier>B1</pricingTier>
                             <!--windows only-->
                             <javaVersion>1.8</javaVersion>
-                            <javaWebContainer>tomcat 8.5</javaWebContainer>
+                            <!-- Exclude tomcat for embedded Spring Boot webapp -->
+                            <!-- <javaWebContainer>tomcat 8.5</javaWebContainer> -->
                             <deploymentType>ftp</deploymentType>
                             <resources>
                                 <resource>
